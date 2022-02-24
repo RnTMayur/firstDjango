@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <table>
+    <tr>
+      <th>Company</th>
+      <th>Contact</th>
+      <th>Country</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+      <td style="display: none;">{{i.id}}</td>
+      <td>{{i.name}}</td>
+      <td>{{i.contact}}</td>
+      <td>{{i.country}}</td>
+      <td><a href="/delete?id={{i.id}}">delete</a></td>
+      <td><a href="/edit?id={{i.id}}">edit</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <form action="insert" method="post">
+    {% csrf_token %}
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name">
+    <label for="contact">Contact</label>
+    <input type="number" name="contact" id="contact">
+    <label for="country">Country</label>
+    <input type="text" name="country" id="country">
+    <button type="submit">submit  </button>
+    <button type="reset">reset</button>
+  </form>
+</body>
+
+</html>
